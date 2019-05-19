@@ -1,3 +1,4 @@
+'use strict';
 /** @module getParsedIORegInfo */
 /*
 Good info: https://www.cnet.com/news/about-the-os-x-byhost-preferences-directory/

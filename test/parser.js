@@ -1,4 +1,5 @@
 /* eslint-disable no-console, no-unused-vars, quotes */
+'use strict';
 
 import test from 'ava';
 import Parser from '../PlistParser.js';
@@ -211,7 +212,7 @@ test("Erring: Unfinished angled bracket string", t => {
   t.true(message.includes('Unexpected end of quoted string at offset'));
 });
 
-test("Erring: Unfinished angled bracket string", t => {
+test("Erring: Unfinished angled bracket string with backslash", t => {
   const plist = `<"ab\\`;
   const parser = new Parser({plist, allowAngledBracketStrings: true});
   const {message} = t.throws(() => {

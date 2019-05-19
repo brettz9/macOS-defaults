@@ -1,3 +1,5 @@
+'use strict';
+
 import test from 'ava';
 import {MacOSDefaults, jsToPropertyListXML} from '../';
 
@@ -818,7 +820,7 @@ test(`Erring: defaults write domain plist object; bad input`, async t => {
   );
   t.true(message.includes('A plist object must be wrapped inside of a `value` with no other properties'));
 });
-test(`Erring: defaults write domain plist object; bad input`, async t => {
+test(`Erring: defaults write domain plist object; bad input (two properties)`, async t => {
   const mod = new MacOSDefaults();
   const [domain, plistPath] = getSamplePlistFile();
   t.false(existsSync(plistPath), 'Path should not exist');
@@ -850,18 +852,18 @@ test(`Erring: defaults write domain 'plist'; bad string input`, async t => {
   const mod = new MacOSDefaults();
   const [domain, plistPath] = getSamplePlistFile();
   t.false(existsSync(plistPath), 'Path should not exist');
-  const {message} = await t.throws(
-    mod.write(domain, '{a = 1;')
-  );
+  const {message} = await t.throwsAsync(() => {
+    return mod.write(domain, '{a = 1;');
+  });
   t.true(message.includes('Could not parse'));
 });
 test(`Erring: defaults write domain 'plist'; bad string input (single object)`, async t => {
   const mod = new MacOSDefaults();
   const [domain, plistPath] = getSamplePlistFile();
   t.false(existsSync(plistPath), 'Path should not exist');
-  const {message} = await t.throws(
-    mod.write({domain, plist: '{a = 2;'})
-  );
+  const {message} = await t.throwsAsync(() => {
+    return mod.write({domain, plist: '{a = 2;'});
+  });
   t.true(message.includes('Could not parse'));
 });
 test(`Erring: defaults write-sync domain 'plist'; bad string input`, t => {
