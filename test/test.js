@@ -1066,7 +1066,7 @@ test(`Erring: defaults rename; bad key type (single object)`, async t => {
 
 // We only test this in one form because stdin will be all consumed; we
 //   instead test the `stream` argument in subsequent tests
-test(`defaults import domain -`, async t => {
+test.skip(`defaults import domain -`, async t => {
   const mod = new MacOSDefaults();
   const [domain, plistPath] = getSamplePlistFile();
   t.false(existsSync(plistPath), 'Path should not exist');
