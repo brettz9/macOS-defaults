@@ -564,7 +564,7 @@ class Spawn {
    * @param {boolean} [cfg.log=false] Whether to log steps to console
    * @param {boolean} [cfg.sync=false] Whether to use the synchronous API
    */
-  constructor ({debug, log, sync}) {
+  constructor ({debug, log, sync} = {}) {
     Object.assign(this, {debug, log, sync});
   }
   /**
@@ -1130,4 +1130,5 @@ class MacOSDefaults extends Spawn {
   }
 }
 
+exports.Spawn = Spawn;
 exports.MacOSDefaults = MacOSDefaults;
