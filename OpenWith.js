@@ -7,7 +7,7 @@ class OpenWith extends XAttr {
   getSync (file, opts) {
     const res = this.spawnSync(
       opts,
-      '-px com.apple.LaunchServices.OpenWith ' + file + ' | xxd -r -p | plutil -p -'
+      '-px com.apple.LaunchServices.OpenWith ' + file + ' | xxd -r -p'  // | plutil -p -'
     );
     return this.constructor.parse(res);
   }
@@ -15,7 +15,7 @@ class OpenWith extends XAttr {
   getAsync (file, opts) {
     return this.spawnAsync(
       opts,
-      '-px com.apple.LaunchServices.OpenWith ' + file + ' | xxd -r -p | plutil -p -'
+      '-px com.apple.LaunchServices.OpenWith ' + file + ' | xxd -r -p ' // | plutil -p -'
     ).then((res) => {
       return this.constructor.parse(res);
     });

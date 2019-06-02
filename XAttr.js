@@ -1,12 +1,13 @@
 const Spawn = require('./Spawn.js');
 
+const bplist = require('../node-bplist-parser');
+
 class XAttr extends Spawn {
   // Todo: Make a genuine parser
-  static parseXAttr (str) {
-    return JSON.parse(str
-      .replace(/(\s*"[^"]*?")\s*=>(.*)$/gm, '$1:$2,')
-      .replace(/,\s*\}\s*$/, '\n}')
-    );
+  static async parseXAttr (str) {
+    // Todo: Change to get buffer
+    console.log('aaa', await bplist.parseFile(Buffer.from(str, 'utf8')));
+    return await bplist.parseFile(Buffer.from(str, 'utf8'));
   }
   spawn (opts, ...args) {
     return super.spawn(Object.assign({cmd: 'xattr'}, opts), ...args);
