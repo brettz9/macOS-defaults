@@ -55,6 +55,7 @@
 - Docs (README): Fix example, use JS syntax highlighting, fix headings
 - Docs: Indicate non-obvious differences
 - Docs: Typo
+- npm: Bump get-stream dep
 
 ### Dev-facing
 
@@ -68,7 +69,6 @@
 - npm: ESLint script
 - npm: Switch to `pnpm`
 - npm: Update devDeps
-- npm: Bump get-stream dep
 - npm: Switch to pnpm for massive file size saving
 - npm (Testing): Create separate scripts for testing main or parser file
 - Testing: Skip problematic stream test
