@@ -30,7 +30,7 @@ test("Erring: Bad root string (unquoted Unicode)", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(
     message.includes('Unexpected character') &&
     message.includes('after root processed on first run')
@@ -70,13 +70,13 @@ test("Erring: unquoted string not at root", t => {
   let parser = new Parser({plist, allowUnquotedStringsAtRoot: true});
   let {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Missing comma between array items'));
   plist = `{a=abc def=ggg;}`;
   parser = new Parser({plist, allowUnquotedStringsAtRoot: true});
   ({message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError));
+  }, {instanceOf: TypeError}));
   t.true(message.includes('Missing semi-colon between dict items'));
 });
 
@@ -160,7 +160,7 @@ test("Erring: Bad data (hex)", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Invalid data (hex) end character'));
 });
 
@@ -169,7 +169,7 @@ test("Erring: Angled bracket string, bad character after quote", t => {
   const parser = new Parser({plist, allowAngledBracketStrings: true});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Angled bracket string closing bracket expected but found'));
 });
 
@@ -178,7 +178,7 @@ test("Erring: Escaped quote outside of quoted string", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(
     message.includes('Unexpected character') &&
     message.includes('after root processed on first run')
@@ -190,7 +190,7 @@ test("Erring: Unfinished quoted string", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(message.includes('Unexpected end of quoted string at offset'));
 });
 
@@ -199,7 +199,7 @@ test("Erring: Unfinished quoted string (after backslash)", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(message.includes('Unexpected end of quoted string (after backslash)'));
 });
 
@@ -208,7 +208,7 @@ test("Erring: Unfinished angled bracket string", t => {
   const parser = new Parser({plist, allowAngledBracketStrings: true});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(message.includes('Unexpected end of quoted string at offset'));
 });
 
@@ -217,7 +217,7 @@ test("Erring: Unfinished angled bracket string with backslash", t => {
   const parser = new Parser({plist, allowAngledBracketStrings: true});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(message.includes('Unexpected end of quoted string (after backslash)'));
 });
 
@@ -226,7 +226,7 @@ test("Erring: Non-value supplied", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(message.includes('No non-whitespace input found'));
 });
 
@@ -235,7 +235,7 @@ test("Erring: Unexpected dict closing", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Unexpected close for dict at'));
 });
 
@@ -244,7 +244,7 @@ test("Erring: Unexpected array closing", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Unexpected close for array at'));
 });
 
@@ -253,7 +253,7 @@ test("Erring: Missing comma within array", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Missing comma between array items'));
 });
 test("Erring: Missing semi-colon within dict", t => {
@@ -261,7 +261,7 @@ test("Erring: Missing semi-colon within dict", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Missing semi-colon between dict items'));
 });
 
@@ -270,7 +270,7 @@ test("Erring: Missing equals within dict", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Expecting "=" character after dict key'));
 });
 test("Erring: Missing value within dict", t => {
@@ -278,7 +278,7 @@ test("Erring: Missing value within dict", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Unexpected semi-colon during non-dict mode'));
 });
 
@@ -287,7 +287,7 @@ test("Erring: Unexpected array comma within dict", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Unexpected comma during non-array mode'));
 });
 
@@ -296,7 +296,7 @@ test("Erring: Unexpected dict semi-colon within array", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Unexpected semi-colon during non-dict mode'));
 });
 
@@ -305,7 +305,7 @@ test("Erring: Unexpected dict equals after dict key", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(message.includes('Expecting "=" character after dict key'));
 });
 
@@ -314,7 +314,7 @@ test("Erring: Unexpected character", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, TypeError);
+  }, {instanceOf: TypeError});
   t.true(
     message.includes('Unexpected character') &&
     message.includes('after root processed on first run')
@@ -326,7 +326,7 @@ test("Erring: Incomplete data (hex)", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(
     message.includes('Premature end to data (hex)')
   );
@@ -337,7 +337,7 @@ test("Erring: Incomplete angled bracket string", t => {
   const parser = new Parser({plist, allowAngledBracketStrings: true});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(
     message.includes('Premature end to angled bracket string')
   );
@@ -348,7 +348,7 @@ test("Erring: Incomplete array (ends before ending parenthesis)", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(
     message.includes('Premature end to array')
   );
@@ -359,7 +359,7 @@ test("Erring: Incomplete dict (ends before key)", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(
     message.includes('Premature end to dict (before key)')
   );
@@ -370,7 +370,7 @@ test("Erring: Incomplete dict (ends after key)", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(
     message.includes('Premature end to dict (before equals)')
   );
@@ -381,7 +381,7 @@ test("Erring: Incomplete dict (ends after equals)", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(
     message.includes('Premature end to dict (after equals)')
   );
@@ -392,7 +392,7 @@ test("Erring: Incomplete dict (ends before semi-colon)", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(
     message.includes('Premature end to dict (before semi-colon)')
   );
@@ -403,7 +403,7 @@ test("Erring: Incomplete dict (ends after semi-colon)", t => {
   const parser = new Parser({plist});
   const {message} = t.throws(() => {
     const result = parser.start();
-  }, RangeError);
+  }, {instanceOf: RangeError});
   t.true(
     message.includes('Premature end to dict (after semi-colon)')
   );

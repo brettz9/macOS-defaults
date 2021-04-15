@@ -11,7 +11,7 @@
   "scripts": {
     "jsdoc": "jsdoc --private --pedantic --configure jsdoc.conf.json . README.md package.json",
     "eslint": "eslint .",
-    "test": "ava",
+    "test": "ava --timeout=20s",
     "test-main": "ava test/test.js",
     "test-parser": "ava test/parser.js"
   },
@@ -50,9 +50,15 @@
   "dependencies": {
     "get-stream": "^6.0.1"
   },
+  "ava": {
+    "require": [
+      "esm"
+    ]
+  },
   "devDependencies": {
-    "ava": "^2.4.0",
+    "ava": "^3.15.0",
     "eslint": "^7.24.0",
+    "esm": "^3.2.25",
     "jsdoc": "^3.6.6"
   }
 }
