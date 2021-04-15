@@ -29,6 +29,10 @@
     as demo of options)
 - Enhancement (validation): Check keys are strings, verify passed values
     match type (or can be converted), verify domain is present where required
+- Enhancement: Add `OpenWith` and `XAttr` modules
+- Enhancement: Factor out spawn code for export (including allowing for no
+    arguments)
+- Optimization: Add `use strict`
 - API (constructor) accepts any of the following options: `debug`,
     `jsonResults`, `log`, `sync`, `forceReal`, `forceHex`
 - API (write): Accept key-type/value pairs in structured formats (1. A
@@ -46,8 +50,8 @@
 - API (domains): Return/resolve into an array of domains
 - API (find): Return a parsed structure
 - API (import): Allow stream (or pseudo-stream)
-- Linting (npm): Add `engines`, `contributors` (also use more typical property
-    order)
+- Linting (npm): Add `engines` (8.0.0+), `contributors` (also use more typical
+    property order)
 - Docs (README): Fix example, use JS syntax highlighting, fix headings
 - Docs: Indicate non-obvious differences
 - Docs: Typo
@@ -58,11 +62,18 @@
     other rules (consistent semi-colons, use variadic parameters, etc.)
 - Linting (ESLint): quote rules, allow module (for tests), lint tests
 - Linting: ES2017, allow template literals
+- Linting: Rename eslintrc to include recommended json extension
 - Refactoring: Arrow functions; prefer const
+- npm: Add eslint devDep and ignore file
 - npm: ESLint script
 - npm: Switch to `pnpm`
-- npm: Bump devDep. `ava`
+- npm: Update devDeps
+- npm: Bump get-stream dep
+- npm: Switch to pnpm for massive file size saving
 - npm (Testing): Create separate scripts for testing main or parser file
+- Testing: Skip problematic stream test
+- Testing: Avoid duplicate test names and change throws->throwsAsync
+    (per new ava requirements)
 - Testing: Test good and bad arguments, values; extended and single object
     signatures, compare resulting XML
 
